@@ -10,13 +10,13 @@ regarding your AWS Educate account for this class.  We will be using AWS to
 
 ### Background
 
+
 ### Resources and Setup
 
 ##### Resources
 * Github repo of lab code
 * AWS Educate Environment
 * SSH
-* Pro Git (reference manual for git usage) https://git-scm.com/book/en/v2
 
 ##### Setup
 * Register for an account at https://github.com/
