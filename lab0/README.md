@@ -24,7 +24,7 @@ regarding your AWS Educate account for this class.  We will be using AWS to
 * Create a Fork of 
 
 ### Task 1
-
+Provision the lab environment in AWS using the following:
 
 ### Task 2
 
