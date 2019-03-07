@@ -46,9 +46,9 @@ have a better suggestion send it to Matt Kijowski via Lab Talk).
 * [Install MobaXterm Home Edition](https://mobaxterm.mobatek.net/download.html)
 
 
-### Task 1
-Provision the lab environment in AWS.  Assuming you have registerd for AWS
-Educate and have access to this class you simply need to [sign in to AWS educate](https://www.awseducate.com/signin/SiteLogin),
+### Task 1 Provision the lab environment in AWS.  
+Assuming you have registerd for AWS Educate and have access to this class you 
+simply need to [sign in to AWS educate](https://www.awseducate.com/signin/SiteLogin),
 go to the CEG 4900/6900 Cyber Security Analysis - Applied classroom, then click
 the blue AWS Console button.  This will launch the AWS console (may require two
 clicks if you were laready signed in to AWS with your personal account) and sign
@@ -61,9 +61,26 @@ AWS console](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Home:).
 In the center area you should see a list of all Resources you have
 available (you will be returning here often).  Right now they should all be 0.
 Click on [0 Key Pairs](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:sort=keyName)
+From here you should see no existing SSH key pairs.  To create one click on the
+`Create Key Pair` blue button.  This will create a public/private key pair,
+stores the public key in AWS, and downloads the private key to your local
+machine.  Do not lose this private key.  Doing so will prevent you from being
+able to access any labs created with it.  If you do lose it simply delete it
+from AWS and create a new one.
 
-[Once you are signed in to
-the AWS console click here to provision lab0](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=CEG-4900Lab0&templateURL=https:%2F%2Fs3.amazonaws.com%2Fcf-templates-wylc6d3bougs-us-east-1%2Flab0.yml)
+[Once you have created your SSH key, click here to provision lab0](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=CEG-4900Lab0&templateURL=https:%2F%2Fs3.amazonaws.com%2Fcf-templates-wylc6d3bougs-us-east-1%2Flab0.yml)
+This will take you to another AWS service called Cloud Formation (AWS CF).  The
+link will automatically fill most of the fields necessary, you will need to
+select the SSH key you just created from the drop down menu.  After selecting
+your key keep clicking next to finalize creation of your lab space.
+
+Once you have created the AWS Cloud formation stack you can [return to the EC2
+service](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Home:).
+Here you should see additional resources have been created. [Click on Running
+Instances](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:sort=instanceState)
+to see information about the servers created as a part of the cloud formation
+template.  You will need to retrieve the Elastic IP of the Ubuntu instance by
+selecting it and looking at the information in the Description below.
 
 ### Task 2
 
