@@ -82,6 +82,9 @@ to see information about the servers created as a part of the cloud formation
 template.  You will need to retrieve the Elastic IP of the Ubuntu instance by
 selecting it and looking at the information in the Description below.
 
+Finally, you are ready to make an SSH connection to your AWS server.  Using MobaXterm run the following
+
+
 ### Task 2
 
 
