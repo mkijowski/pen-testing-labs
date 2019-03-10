@@ -45,54 +45,129 @@ have a better suggestion send it to Matt Kijowski via Lab Talk).
   (username/password)
 * [Install MobaXterm Home Edition](https://mobaxterm.mobatek.net/download.html)
 
+### Lab Procedure
+Perform the following tasks.  Document your progress in a plain text file named
+`lab01.txt`.
 
-### Task 1 Provision the lab environment in AWS.  
-Assuming you have registerd for AWS Educate and have access to this class you 
-simply need to [sign in to AWS educate](https://www.awseducate.com/signin/SiteLogin),
-go to the CEG 4900/6900 Cyber Security Analysis - Applied classroom, then click
-the blue AWS Console button.  This will launch the AWS console (may require two
-clicks if you were laready signed in to AWS with your personal account) and sign
-you in as a federated user with a username looking like
-`vocstartsoft/user236529=lastname.number@wright.edu`.
+At the top of the file please enter your personal details as follows:
+```
+Name: Your name
+Email: Your email
 
-After successfully signing in you will first need to create and SSH key pair via
-AWS for signing in to your systems.  To do this select the [EC2 service from the
-AWS console](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Home:).
-In the center area you should see a list of all Resources you have
-available (you will be returning here often).  Right now they should all be 0.
-Click on [0 Key Pairs](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:sort=keyName)
-From here you should see no existing SSH key pairs.  To create one click on the
-`Create Key Pair` blue button.  This will create a public/private key pair,
-stores the public key in AWS, and downloads the private key to your local
-machine.  Do not lose this private key.  Doing so will prevent you from being
-able to access any labs created with it.  If you do lose it simply delete it
-from AWS and create a new one.
+```
+For each task give a summary of steps taken and document any challenges 
+you faced.  Be sure to answer all questions asked.
 
-[Once you have created your SSH key, click here to provision lab0](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=CEG-4900Lab0&templateURL=https:%2F%2Fs3.amazonaws.com%2Fcf-templates-wylc6d3bougs-us-east-1%2Flab0.yml)
-This will take you to another AWS service called Cloud Formation (AWS CF).  The
-link will automatically fill most of the fields necessary, you will need to
-select the SSH key you just created from the drop down menu.  After selecting
-your key keep clicking next to finalize creation of your lab space.
+### Task 1 - Provision the lab environment in AWS.  
+Assuming you have registerd for AWS Educate and have access to this class 
+perform the following:
 
-Once you have created the AWS Cloud formation stack you can [return to the EC2
-service](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Home:).
-Here you should see additional resources have been created. [Click on Running
-Instances](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:sort=instanceState)
-to see information about the servers created as a part of the cloud formation
-template.  You will need to retrieve the Elastic IP of the Ubuntu instance by
-selecting it and looking at the information in the Description below.
+* [Sign in to AWS educate](https://www.awseducate.com/signin/SiteLogin),
+  go to the CEG 4900/6900 Cyber Security Analysis - Applied classroom, then click
+  the blue AWS Console button.  
+  
+  This will launch the AWS console (may require two
+  clicks if you were laready signed in to AWS with your personal account) and sign
+  you in as a federated user with a username looking like
+  `vocstartsoft/user236529=lastname.number@wright.edu`.
+* Create a SSH key pair via AWS for signing in to your systems.  To do this
+  select the [EC2 service from the AWS console](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Home:).
+  In the center area you should see a list of all Resources you have
+  available (you will be returning here often).  Right now they should all be 0.
+* Click on [0 Key Pairs](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:sort=keyName)
+  From here you should see no existing SSH key pairs.  
+* Click on the `Create Key Pair` blue button.  This will create a 
+  public/private key pair, stores the public key in AWS, and downloads the
+  private key to your local machine.  
+* **Do not lose this private key.**  Doing so will prevent you from being
+  able to access any labs created with it.  If you do lose it simply delete it
+  from AWS and create a new one.
+* [Once you have created your SSH key, click here to provision lab0](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=CEG-4900Lab0&templateURL=https:%2F%2Fs3.amazonaws.com%2Fcf-templates-wylc6d3bougs-us-east-1%2Flab0.yml)
+  This will take you to another AWS service called Cloud Formation (AWS CF).  The
+  link will automatically fill most of the fields necessary, you will need to
+  select the SSH key you just created from the drop down menu.  After selecting
+  your key keep clicking next to finalize creation of your lab space.
 
-Finally, you are ready to make an SSH connection to your AWS server.  Using MobaXterm run the following
+* Once you have created the AWS Cloud formation stack you can [return to the EC2 service](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Home:).
+  Here you should see additional resources have been created. 
+* [Click on Running Instances](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:sort=instanceState)
+  to see information about the servers created as a part of the cloud formation
+  template.  You will need to retrieve the Elastic IP of the Ubuntu instance by
+  selecting it and looking at the information in the Description below.
 
 
-### Task 2
+### Task 2 - Connecting to the AWS environment
+**You are now ready to make an SSH connection to your AWS server.**  Using
+MobaXterm perform the following actions:
+* Create/copy the AWS private SSH key to your home directory
+* Make the key only readable by your user (`chmod`)
+* SSH into your AWS server with the following (replace */path/to/private/key*
+  and *ElasticIP* with your information):
+  `ssh -i /path/to/private/key ubuntu@ElasticIP`
+  
+
+### Task 3 - Sockets
+There are many tools and applications that allow you to create networked
+servers but at the heart of them all are sockets.  A *socket* is one endpoint
+in a two way communication link between two programs.
+The `code/tcp-client.py` is a simply python program that creates a client 
+socket.  Using this python program answer the following questions:
+
+1. What IP address and port is `tcp-client.py` connecting to?
+2. What server application is running at the other end of the communication link?
+3. Use `tcp-client.py` to make a connection over port 22 to the AWS instance at
+   10.0.0.30.  What information did you recieve?
+
+On the other end of the communication channel is the server.  `code/tcp-server.py`
+is a simple tcp server program using the python `socket` libraries.  Use
+`code/tcp-server.py` to answer the following questions:
+
+1. What port is `tcp-server.py` connecting to?
+2. Make the necessary changes to `tcp-client.py` so that it will connect to 
+   your `tcp-server.py` socket.  Describe the IP addresses and ports associated 
+   with both sockets associated with this connection.
+
+### Task 4 - Simple sockets with Netcat
+Now that you have some experience working with sockets, research `netcat` 
+(frequently abbreviated to `nc`).
+
+Using `nc`, make a connection to `www.wright.edu` over port 80 and send the
+same `GET` request as in `code/tcp-client.py`.
+
+1. Is the output the same?  Why or why not?
+2. Using `nc` only, establish two sockets, one client and one server, capable
+   of passing data between one another.  Describe both sockets and list the
+   commands used to create them.
+
+### Task 5 - Reverse and bind Shells
+Now that you have some experience creating sockets, lets take a look at likely
+the most popular usage of `nc`, bind and reverse shells.
+
+Investigate the following linux command(s):
+```
+rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/sh -i 2>&1 | nc -l 1234 >/tmp/f
+```
+
+Execute the above on your AWS machine and connect to it from your local
+machine.  
+
+1. Describe this connection (hint: try sending it `ls` followed by a 
+   return.
+2. Do you feel comfortable leaving this command running?  What would happen
+   if someone else connected to this socket?
 
 
-### Task 3
+### Task 6 - Turns out Task 3 was not a waste of time...
+Because of some of the dangerous things that `nc` can do, most system
+administrators do not have it installed.  While this does prevent a simple
+one-line unix command from allowing anyone in to a shell, there are many other
+ways to create a reverse or bind shell assuming there is a programming language
+installed with a `socket()` library (like python).
 
 
-### Task 4
 
+### Task 7
+Proxies and tunnels
 
 ### Acknowledgement
 Portions of this lab were derived from Black Hat Python: Python Programming for
