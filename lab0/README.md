@@ -1,4 +1,5 @@
-## Lab 0: Making Connections...
+## Lab 1 - Making Connections...
+
 ### Introduction to the lab space
 The purpose of lab 0 is to familiarize yourself with the lab space we will be
 using for the remainder of the labs.  You should have received an email
@@ -6,10 +7,24 @@ regarding your AWS Educate account for this class.  We will be using AWS to
 create virtual environments for you to use to complete the tasks given.
 
 ### A Note on Ethics
+Much of the material in these labs could be used to gain access to a wide
+array of systems both on and off campus.  I would like to remind everyone
+that gaining access to such systems without permission would be a violation
+of Wright Way policy (and possibly several laws) which can be punishable up 
+to expulsion from the University (or a criminal suit being brought against
+the student.
+
+That being said we are here to learn, if you suspect/discover that a site 
+or server may be vulnerable please bring it up in class so that we can 
+discuss proper methods of requesting permission to perform a pen test and
+proper remediation.
 
 ### Objectives
 1. Become familiar with creating lab environments via AWS CloudFormation files
-3. Brush up on a few networking topics needed for this course
+3. Brush up on networking topics needed for this course including:
+   * sockets
+   * client/server model
+   * tunnels/proxies
 2. Start building your git(hub) toolbox
 
 ### Background
@@ -95,6 +110,8 @@ perform the following:
   template.  You will need to retrieve the Elastic IP of the Ubuntu instance by
   selecting it and looking at the information in the Description below.
 
+*Note: There are no questions to answer in Task 1.  Please just document your
+experience creating the lab environment.*
 
 ### Task 2 - Connecting to the AWS environment
 **You are now ready to make an SSH connection to your AWS server.**  Using
@@ -118,12 +135,12 @@ socket.  Using this python program answer the following questions:
 3. Use `tcp-client.py` to make a connection over port 22 to the AWS instance at
    10.0.0.30.  What information did you recieve?
 
-On the other end of the communication channel is the server.  `code/tcp-server.py`
-is a simple tcp server program using the python `socket` libraries.  Use
-`code/tcp-server.py` to answer the following questions:
+   On the other end of the communication channel is the server.  `code/tcp-server.py`
+   is a simple tcp server program using the python `socket` libraries.  Use
+   `code/tcp-server.py` to answer the following questions:
 
-1. What port is `tcp-server.py` connecting to?
-2. Make the necessary changes to `tcp-client.py` so that it will connect to 
+4. What port is `tcp-server.py` connecting to?
+5. Make the necessary changes to `tcp-client.py` so that it will connect to 
    your `tcp-server.py` socket.  Describe the IP addresses and ports associated 
    with both sockets associated with this connection.
 
@@ -141,10 +158,15 @@ same `GET` request as in `code/tcp-client.py`.
 
 ### Task 5 - Reverse and bind Shells
 Now that you have some experience creating sockets, lets take a look at likely
-the most popular usage of `nc`, bind and reverse shells.  [Read more about 
-reverse and bind shells here](https://www.hackingtutorials.org/networking/hacking-netcat-part-2-bind-reverse-shells/) then continue.
+the most popular usage of `nc`, [bind and reverse shells.](https://www.hackingtutorials.org/networking/hacking-netcat-part-2-bind-reverse-shells/) 
+then continue.  Bind and reverse shells are the bread and butter of attackers
+and pentesters.  Many of the vulnerabilities we will be taking a look at in
+this class have the same end result: Remote Command Execution, meaning they
+allow an attacker or pentester to run an arbitrary commancd remotely without
+the need to be signed in or even have an account on the system.  But how much
+damage could an atacker do with `cd` or `ls` (rhetorical, no need to answer
+this one).  Instead, investigate the following linux command(s):
 
-Investigate the following linux command(s):
 ```
 rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/sh -i 2>&1 | nc -l 1234 >/tmp/f
 ```
@@ -152,10 +174,16 @@ rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/sh -i 2>&1 | nc -l 1234 >/tmp/f
 Execute the above on your AWS machine and connect to it from your local
 machine.  
 
-1. Describe this connection (hint: try sending it `ls` followed by a 
-   return.
+1. Describe what the above commands do (hint: try sending it `ls` followed by a 
+   return.)  Break it down into three sub commands and describe each one
+   ```
+   rm /tmp/f
+   mkfifo /tmp/f
+   cat /tmp/f | /bin/sh -i 2>&1 | nc -l 1234 >/tmp/f
+   ```
 2. Do you feel comfortable leaving this command running?  What would happen
    if someone else connected to this socket?
+
 
 
 ### Task 6 - Turns out Task 3 was not a waste of time...
@@ -170,8 +198,8 @@ create a reverse tunnel.
 
 1. List the commands used to establish a reverse shell with `bhpnet.py` and how
    to connect to it with `nc`.  
-2. Does this shell differ at all from the previous
-   reverse shell you created?
+2. Does this shell differ at all from the previous reverse shell you created?
+
 
 ### Task 7
 
