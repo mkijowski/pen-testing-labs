@@ -141,7 +141,8 @@ same `GET` request as in `code/tcp-client.py`.
 
 ### Task 5 - Reverse and bind Shells
 Now that you have some experience creating sockets, lets take a look at likely
-the most popular usage of `nc`, bind and reverse shells.
+the most popular usage of `nc`, bind and reverse shells.  [Read more about 
+reverse and bind shells here](https://www.hackingtutorials.org/networking/hacking-netcat-part-2-bind-reverse-shells/) then continue.
 
 Investigate the following linux command(s):
 ```
@@ -164,11 +165,17 @@ one-line unix command from allowing anyone in to a shell, there are many other
 ways to create a reverse or bind shell assuming there is a programming language
 installed with a `socket()` library (like python).
 
+Investigate the `code/bhpnet.py`, explain what it does.  Use `bhpnet.py` to
+create a reverse tunnel.
 
+1. List the commands used to establish a reverse shell with `bhpnet.py` and how
+   to connect to it with `nc`.  
+2. Does this shell differ at all from the previous
+   reverse shell you created?
 
 ### Task 7
-Proxies and tunnels
+
 
 ### Acknowledgement
 Portions of this lab were derived from Black Hat Python: Python Programming for
-HAckers and Pentesters, by Justin Seitz.
+Hackers and Pentesters, by Justin Seitz.
